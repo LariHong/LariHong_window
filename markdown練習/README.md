@@ -9,5 +9,28 @@ _Writing in Markdown is not that hard!_
 
 If you're thinking to yourself, **_This is unbelievable_**, you'd probably be right.
 
-## 第二部份
-## 第三部份
+## 第2堂課
+# Header one
+## Header two
+### Header three
+#### Header four
+##### Header five
+###### Header six
+
+#### _Colombian Symbolism in One Hundred Years of Solitude_
+
+Here's some words about the book _One Hundred Years..._.
+
+## 第3堂課
+[Search for it.](www.google.com)
+
+[You're **really, really** going to want to see this.](www.dailykitten.com)
+
+#### The Latest News from [the BBC](www.bbc.com/news)
+
+Do you want to [see something fun][a fun place]?
+
+Well, do I have [the website for you][another fun place]!
+
+[a fun place]:www.zombo.com
+[another fun place]: www.stumbleupon.com
