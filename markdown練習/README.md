@@ -67,9 +67,9 @@ I read this interesting quote the other day:
 2. Slice the tomatoes
 3. Rub the tomatoes in flour
 
-* Azalea (Ericaceae _Rhododendron_)
-* Chrysanthemum (Anthemideae _Chrysanthemum_)
-* Dahlia (Coreopsideae _Dahlia_)
+* Azalea (_Ericaceae Rhododendron_)
+* Chrysanthemum (_Anthemideae Chrysanthemum_)
+* Dahlia (_Coreopsideae Dahlia_)
 
 * Calculus
     * A professor
@@ -89,3 +89,17 @@ I read this interesting quote the other day:
   Be careful when holding the knife.
   
   For more help on tomato slicing, see Thomas Jefferson's seminal essay _Tom Ate Those_.
+
+## 第7堂課
+
+We pictured the meek mild creatures where  
+They dwelt in their strawy pen,  
+Nor did it occur to one of us there  
+To doubt they were kneeling then.
+
+1. Crack three eggs over a bowl.  
+ Now, you're going to want to crack the eggs in such a way that you don't make a mess.  
+ If you _do_ make a mess, use a towel to clean it up!
+2. Pour a gallon of milk into the bowl.  
+ Basically, take the same guidance as above: don't be messy, but if you are, clean it up!
+
