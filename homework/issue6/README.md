@@ -1,3 +1,5 @@
+[作業二程式碼](https://github.com/LariHong/LariHong_window/blob/main/homework/issue6/homework2.ipynb)
+
 > 請將以下網址的json,儲存為**aqi.json檔**
 ```python
 url = 'https://data.moenv.gov.tw/api/v2/aqx_p_488?api_key=e8dd42e6-9b8b-43f8-991e-b3dee723a52d&limit=1000&sort=datacreationdate desc&format=JSON'
