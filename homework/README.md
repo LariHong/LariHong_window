@@ -1,6 +1,6 @@
 # 這是第二次作業
 
-[作業二程式碼]](./homework2.ipynb)
+[作業二程式碼](./homework2.ipynb)
 
 > 請將以下網址的json,儲存為**aqi.json檔**
 ```python
