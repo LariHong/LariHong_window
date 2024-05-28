@@ -106,3 +106,8 @@ if one in dic  #2為**value**
 for key,value in dic.items():
     print(f"key= {key} ,value= {value}" )
 ```
+### set 補充
+>set 要有建構子
+```
+s2:set=set()
+```

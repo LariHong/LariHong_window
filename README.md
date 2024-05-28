@@ -7,3 +7,5 @@
 [markdown語法練習](./markdown練習/README.md)
 
 [miniconda的指令](https://github.com/roberthsu2003/python/tree/master/mini_conda)
+
+[python指令](https://docs.python.org/zh-tw/3/index.html)
