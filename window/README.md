@@ -47,3 +47,40 @@ window:tk.Tk=tk.Tk()
 window.title("視窗名")
 window.mainloop()
 ```
+## 使用繼承Tkinter
+```
+class Window(tk.Tk):
+    def __init__(self):
+        super().__init__()
+        self.title("我是視窗2")
+
+
+window2:tk.Tk=Window()
+window2.mainloop()
+```
+
+## **kwargs的多參數用法
+```
+class Window(tk.Tk):
+    #**xxxx   可以放入父類別的所有參數 也可以不放入
+    def __init__(self,title:str=None,**kwargs):
+        super().__init__(**kwargs)
+        self.title(title)
+# __init__ 內沒有screenName 因為加入**kwargs 
+window2:tk.Tk=Window("123",screenName="789")
+window2.mainloop()
+```
+
+## Tkinter 有一個 ttk 其中ttk.Label.pack() 會有個新視窗
+```
+class Window2(tk.Tk):
+
+    def __init__(self,title:str=None,**kwargs):
+        super().__init__(**kwargs)
+        self.title(title)
+        laber:ttk.Label=ttk.Label(self,text="我是ttk")
+        laber.pack()
+
+window3:tk.Tk=Window2()
+window3.mainloop()
+```
