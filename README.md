@@ -9,3 +9,5 @@
 [miniconda的指令](https://github.com/roberthsu2003/python/tree/master/mini_conda)
 
 [python指令](https://docs.python.org/zh-tw/3/index.html)
+
+### 在專案中新增外部套件 需要建立一個 requirements.txt
