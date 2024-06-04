@@ -266,3 +266,4 @@ else:
 ### [線上看json參考網址](https://jsonviewer.stack.hu/)
 ### module.requests
 >[參考網址](https://pypi.org/project/requests/)
+>[參考網址](https://github.com/roberthsu2003/python/tree/master/pydantic)
