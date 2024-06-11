@@ -9,6 +9,7 @@ class App(ThemedTk):
         self.entry_name=""
         self.entry_height=""
         self.entry_weight=""
+
         self.window_design()
         self.title_design()
         self.input_design()
@@ -34,30 +35,34 @@ class App(ThemedTk):
         
         label_name=ttk.Label(input_frame,text="姓名:",font=("Arial", 12))
         label_name.grid(row=0,column=0,padx=5,pady=5,sticky=tk.E)
-        entry_name=ttk.Entry(input_frame)
+        self.entry_name=tk.StringVar()
+        self.entry_name.set("")
+        entry_name=ttk.Entry(input_frame,textvariable=self.entry_name)
         entry_name.grid(row=0,column=1,padx=5,pady=5)
-        self.entry_name=entry_name
 
         label_height=ttk.Label(input_frame,text="身高(cm):",font=("Arial", 12))
         label_height.grid(row=1,column=0,padx=5,pady=5,sticky=tk.E)
-        entry_height=ttk.Entry(input_frame)
+        self.entry_height=tk.StringVar()
+        self.entry_height.set("")
+        entry_height=ttk.Entry(input_frame,textvariable=self.entry_height)
         entry_height.grid(row=1,column=1,padx=5,pady=5)
-        self.entry_height=entry_height
 
         label_weight=ttk.Label(input_frame,text="體重(kg):",font=("Arial", 12))
         label_weight.grid(row=2,column=0,padx=5,pady=5,sticky=tk.E)
-        entry_weight=ttk.Entry(input_frame)
+        self.entry_weight=tk.StringVar()
+        self.entry_weight.set("")
+        entry_weight=ttk.Entry(input_frame,textvariable=self.entry_weight)
         entry_weight.grid(row=2,column=1,padx=5,pady=5)
-        self.entry_weight=entry_weight
-
+        
         input_frame.pack(padx=100,pady=30)
 
     def button_design(self):
         style=ttk.Style()
         style.configure("button.TButton",font=('arial',12))
         button_frame=ttk.Frame(self)
-        ttk.Button(button_frame,text="計算BMI",command=self.show_BMI,style="button.TButton").pack()
-        button_frame.pack(side="right",padx=(0,20),pady=10)
+        ttk.Button(button_frame,text="計算BMI",command=self.show_BMI,style="button.TButton").pack(side=tk.RIGHT,fill=tk.X,expand=True)
+        ttk.Button(button_frame,text="關閉",command=self.destroy,style="button.TButton").pack(side=tk.LEFT,fill=tk.X,expand=True)
+        button_frame.pack(padx=20,fill=tk.X)
     
     def show_BMI(self):
         try:
@@ -95,27 +100,45 @@ class App(ThemedTk):
         BmiMessageBox(parent=self,message=result_message,status_color=status_color,title="BMI計算")
 
 class BmiMessageBox(Dialog):
-    def __init__(self,message,status_color,**kwargs):
+    def __init__(self,parent,message,status_color,**kwargs):
+        self.parent=parent
         self.message=message
         self.status_color=status_color
-        super().__init__(**kwargs)
+        super().__init__(parent=parent,**kwargs)
         
     def body(self,master):
-        text = tk.Text(master, height=8, padx=10, pady=10, font=("Arial", 15), width=40)
-        text.pack()
-
         message_list=self.message.split("\n")
+        message_frame=ttk.Frame(self)
+
+        i=0
         for message in message_list:
-            if("過輕" in message or "過重" in message):
-                text.tag_configure("status_color", foreground=self.status_color)
-                text.insert(tk.INSERT,message,"status_color")
-                text.insert(tk.INSERT,"\n")
-            else:
-                text.insert(tk.INSERT,message)
-                text.insert(tk.INSERT,"\n")
+            color="black"
+            if(i==2 and("過輕" in message or "過重" in message)):
+                color="red"
+            if(i==2 and("正常" in message)):
+                color="blue"   
+            label_name=ttk.Label(message_frame,text=message,font=("Arial", 12),foreground=color)
+            label_name.grid(row=i,column=0,padx=5,pady=5,sticky=tk.W)
+            i+=1
 
-        text.config(state='disabled')
+        
+        message_frame.pack()
 
-        return text
+    def apply(self):
+        self.parent.entry_name.set("")
+        self.parent.entry_height.set("")
+        self.parent.entry_weight.set("")
+
+    def buttonbox(self):
+        box = ttk.Frame(self)
+        self.ok_button = tk.Button(box, text="確定", width=10, command=self.ok, default=tk.ACTIVE)
+        self.ok_button.pack(side=tk.LEFT, padx=5, pady=5)
+        box.pack()
+
+    def ok(self):
+        super().ok()     
+
+
+
 
         
