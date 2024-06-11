@@ -33,19 +33,19 @@ class App(ThemedTk):
         style.configure("input.TFrame")
         input_frame =ttk.Frame(self,width=100,height=100,style="input.TFrame")
         
-        label_name=ttk.Label(input_frame,text="姓名:")
+        label_name=ttk.Label(input_frame,text="姓名:",font=("Arial", 12))
         label_name.grid(row=0,column=0,padx=5,pady=5,sticky=tk.E)
         entry_name=ttk.Entry(input_frame)
         entry_name.grid(row=0,column=1,padx=5,pady=5)
         self.entry_name=entry_name
 
-        label_height=ttk.Label(input_frame,text="身高(cm):")
+        label_height=ttk.Label(input_frame,text="身高(cm):",font=("Arial", 12))
         label_height.grid(row=1,column=0,padx=5,pady=5,sticky=tk.E)
         entry_height=ttk.Entry(input_frame)
         entry_height.grid(row=1,column=1,padx=5,pady=5)
         self.entry_height=entry_height
 
-        label_weight=ttk.Label(input_frame,text="體重(kg):")
+        label_weight=ttk.Label(input_frame,text="體重(kg):",font=("Arial", 12))
         label_weight.grid(row=2,column=0,padx=5,pady=5,sticky=tk.E)
         entry_weight=ttk.Entry(input_frame)
         entry_weight.grid(row=2,column=1,padx=5,pady=5)
@@ -75,40 +75,54 @@ class App(ThemedTk):
             #               ,weight=weight,bmi=bmi,title="BMI結果")
 
     def calculate_BMI(self,name,height,weight):
-        bmi = weight / (height / 100) ** 2
-        if bmi < 18.5:
-            status = "體重過輕"
-            ideal_weight = 18.5 * (height / 100) ** 2
-            weight_change = ideal_weight - weight
-            status_color = "red"
-            advice = f"您需要至少增加 {abs(weight_change):.2f} 公斤才能達到正常體重。"
-        elif 18.5 <= bmi <= 24.9:
+        bmi = round(weight / (height / 100) ** 2,2)
+        if 18.5 <= bmi <= 24.9:
             status = "正常"
             status_color = "black"
             advice = "您的體重正常，請保持！"
+        elif bmi < 18.5:
+            status = "過輕"
+            ideal_weight = round(18.5 * (height / 100) ** 2,2)
+            weight_change = ideal_weight - weight
+            status_color = "red"
+            advice = f"需要至少增加 {abs(weight_change):.2f} 公斤才能達到正常體重。"
         else:
-            status = "體重過重"
-            ideal_weight = 24.9 * (height / 100) ** 2
+            status = "過重"
+            ideal_weight = round(24.9 * (height / 100) ** 2,2)
             weight_change = weight - ideal_weight
             status_color = "red"
-            advice = f"您需要至少減少 {abs(weight_change):.2f} 公斤才能達到正常體重。"
+            advice = f"需要至少減少 {abs(weight_change):.2f} 公斤才能達到正常體重。"
+
+        result_message = f"{name} 好:\nbmi:{bmi:.2f}\n體重:{status}\n建議:{advice}"
+
         
-        result_message = f"{name}您好:\n   bmi:{bmi:.2f}\n   體重:{status}\n   建議:{advice}"
-        print(result_message)
+        BmiMessageBox(parent=self,message=result_message,status_color=status_color,title="BMI計算")
 
 
 
-class BmiMseeageBox(Dialog):
-    def __init__(self,name,height,weight,bmi,**kwargs):
+class BmiMessageBox(Dialog):
+    def __init__(self,message,status_color,**kwargs):
+        self.message=message
+        self.status_color=status_color
         super().__init__(**kwargs)
-        self.name=name
-        self.height=height
-        self.weight=weight
-        self.bmi=bmi
+        
     
-    def body(self):
-        text=tk.Text(self,height=8,padx=10,pady=10,font=("helvetica",25),width=40)
+    def body(self,master):
+        text = tk.Text(master, height=8, padx=10, pady=10, font=("Arial", 15), width=40)
         text.pack()
-        #先放字再關閉
-        text.insert(tk.INSERT,"內容文")
+
+        message_list=self.message.split("\n")
+        for message in message_list:
+            if("過輕" in message or "過重" in message):
+                text.tag_configure("status_color", foreground=self.status_color)
+                text.insert(tk.INSERT,message,"status_color")
+                text.insert(tk.INSERT,"\n")
+            else:
+                text.insert(tk.INSERT,message)
+                text.insert(tk.INSERT,"\n")
+
         text.config(state='disabled')
+
+        return text
+
+        
