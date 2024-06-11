@@ -13,8 +13,7 @@ class App(ThemedTk):
         self.title_design()
         self.input_design()
         self.button_design()
-
-       
+  
     def window_design(self):
         self.title("BMI計算器")
         self.resizable(False,False)
@@ -71,8 +70,6 @@ class App(ThemedTk):
             messagebox.showwarning("Warning","格式錯誤")
         else:   
             self.calculate_BMI(name,height,weight)
-            # BmiMseeageBox(parent=self,name=name,height=height
-            #               ,weight=weight,bmi=bmi,title="BMI結果")
 
     def calculate_BMI(self,name,height,weight):
         bmi = round(weight / (height / 100) ** 2,2)
@@ -94,11 +91,8 @@ class App(ThemedTk):
             advice = f"需要至少減少 {abs(weight_change):.2f} 公斤才能達到正常體重。"
 
         result_message = f"{name} 好:\nbmi:{bmi:.2f}\n體重:{status}\n建議:{advice}"
-
-        
+ 
         BmiMessageBox(parent=self,message=result_message,status_color=status_color,title="BMI計算")
-
-
 
 class BmiMessageBox(Dialog):
     def __init__(self,message,status_color,**kwargs):
@@ -106,7 +100,6 @@ class BmiMessageBox(Dialog):
         self.status_color=status_color
         super().__init__(**kwargs)
         
-    
     def body(self,master):
         text = tk.Text(master, height=8, padx=10, pady=10, font=("Arial", 15), width=40)
         text.pack()
