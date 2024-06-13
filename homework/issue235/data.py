@@ -1,6 +1,6 @@
 import requests 
 from requests import Response,JSONDecodeError
-from pydantic import RootModel,BaseModel,field_serializer
+from pydantic import RootModel,BaseModel,field_serializer,Field
 from datetime import datetime
 
 def GetDownloadJson():
@@ -22,16 +22,16 @@ def GetDownloadJson():
 
 class Info(BaseModel):
     sna:str
-    sarea:str
+    行政區:str=Field(alias="sarea")
     mday:datetime
-    ar:str
+    地址:str=Field(alias="ar")
     act:bool
     updateTime:datetime
     total:int
-    available_rent_bikes:int
+    區域可借車輛:int=Field(alias="available_rent_bikes")
     latitude:float
     longitude:float
-    available_return_bikes:int
+    區域可還車輛:int=Field(alias="available_return_bikes")
 
     @field_serializer("mday","updateTime")
     def serialize_str(self,value:datetime) -> str:
@@ -48,14 +48,14 @@ class Info(BaseModel):
         else:
             return "維護中"
 
-class Youbike_Data(RootModel):
+class ubike_Data(RootModel):
     root:list[Info]
 
 
 def load_data()->list[dict]:
 
     alldata=GetDownloadJson()
-    youbike_data=Youbike_Data.model_validate(alldata)
-    data = youbike_data.model_dump()
+    ubike_data=ubike_Data.model_validate(alldata)
+    data = ubike_data.model_dump()
 
     return data
