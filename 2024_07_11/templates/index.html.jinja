@@ -1,0 +1,59 @@
+{% extends "base.html.jinja" %}
+{% block aaa%}
+{{super() }} -ttt
+{% endblock %}
+
+{% block head%}
+{{super() }}
+<style type="text/css">
+    body {
+        background-color: red;
+    }
+</style>
+{% endblock %}
+
+
+{# {%block left_content%}
+{{left | striptags | title}}
+{%endblock%}
+
+{# {%block right_content%}
+<ul>
+    {%for item in['list','of','objects'] %}
+    <li>{{item}}</li>
+    {%endfor%}
+</ul>
+
+{%endblock%} #}
+
+
+{%block right_content%}
+<ul class="nav flex-column">
+    {%for item in['list','of','objects'] %}
+    <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+    </li>
+    {%endfor%}
+</ul>
+{%endblock%} #}
+
+{%block main%}
+<div class="container text-center">
+    <div class="row">
+        <div class="col-4" style="background-color: aqua;">
+            <form action="{{url_for('index')}}" method="get">
+                <select class="form-select" aria-label="Default select example" name="area">
+                    <option selected>選擇行政區</option>
+                    {%for area in areas%}
+                    <option value="{{area}}">{{area}}</option>
+                    {%endfor%}
+                </select>
+                <button type="submit" class="btn btn-primary">送出</button>
+            </form>
+        </div>
+        <div class="col-8" style="background-color: rgb(231, 231, 50);">
+            {{show_area}}
+        </div>
+    </div>
+</div>
+{%endblock%}
