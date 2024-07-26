@@ -1,0 +1,90 @@
+{% extends "base.html.jinja" %}
+{% block aaa%}
+{{super() }} -ttt
+{% endblock %}
+
+{% block head%}
+{{super() }}
+<style type="text/css">
+    body {
+        background-color: white;
+    }
+</style>
+{% endblock %}
+
+
+{# {%block left_content%}
+{{left | striptags | title}}
+{%endblock%}
+
+{# {%block right_content%}
+<ul>
+    {%for item in['list','of','objects'] %}
+    <li>{{item}}</li>
+    {%endfor%}
+</ul>
+
+{%endblock%} #}
+
+
+{%block right_content%}
+<ul class="nav flex-column">
+    {%for item in['list','of','objects'] %}
+    <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+    </li>
+    {%endfor%}
+</ul>
+{%endblock%} #}
+
+{%block main%}
+<div class="container text-center">
+    <div class="row">
+        <div class="col-md-2 col-xl-3" style="background-color: rgb(245, 255, 192);">
+            <form action="{{url_for('index')}}" method="get">
+                <select class="form-select" aria-label="Default select example" name="area">
+                    <option selected>選擇行政區</option>
+                    {%for area in areas%}
+                        {%if  area != show_area%}
+                            <option value="{{area}}">{{area}}</option>
+                        {% endif %}             
+                    {%endfor%}
+                </select>
+                <button type="submit" class="btn btn-primary">送出</button>
+            </form>
+        </div>
+        <div class="col-md-10 col-xl-9">
+            <h3 style="text-align: left; margin-top:0.5em">{{show_area}}</h3>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">站點</th>
+                        <th scope="col">總數</th>
+                        <th scope="col">可借</th>
+                        <th scope="col">可還</th>
+                        <th scope="col">時間</th>
+                        <th scope="col">營運狀態</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {%for detail in show_detail%}
+                    <tr>
+                        <th scope="row">{{detail[0]}}</th>
+                        <td>{{detail[1]}}</td>
+                        <td>{{detail[2]}}</td>
+                        <td>{{detail[3]}}</td>
+                        <td>{{detail[4]}}</td>
+                        {%if detail[5]%}
+                        <td>營業中</td>
+                        {%else%}
+                        <td>維修中</td>
+                        {%endif%}
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+            
+        </div>
+    </div>
+</div>
+{%endblock%}
