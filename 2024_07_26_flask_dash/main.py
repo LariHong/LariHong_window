@@ -6,11 +6,6 @@ from dashboard.board1 import app1
 from dashboard.board2 import app2
 
 app=Flask(__name__)
-#這裡要和board1 對應 但最後不需要+/
-application = DispatcherMiddleware(app,{
-    "/dashboard/app1":app1.server,
-    "/dashboard/app2":app2.server
-})
 
 areas=[tup[0] for tup in data.get_areas()]
 @app.route("/")
@@ -28,6 +23,11 @@ def index1():
 
     return render_template("index1.html.jinja",left=content,areas=areas,show_area=selected_area,show_detail=detail_snaes)
 
+#這裡要和board1 對應 但最後不需要+/
+application = DispatcherMiddleware(app, {
+    '/dashboard/app1': app1.server,
+    '/dashboard/app2': app2.server
+})
 
 if __name__ == "__main__":
     run_simple("localhost",8081,application,use_debugger=True,reloader_type=True)
